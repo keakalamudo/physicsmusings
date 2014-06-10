@@ -1,4 +1,4 @@
-#Ball Shooting Simulation(Gravity + Air Resistance + Wind)
+#Ball Shooting Simulation(Gravity + Air Resistance + Wind) (VPython Source)
 
 from visual import *
 from visual.graph import *
