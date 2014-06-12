@@ -4,7 +4,7 @@ from visual.graph import *
 
 
 #Set up area on screen to display objects
-scene = display(title='Spring',x=80, y=10, width=1000, height=300,background=color.white)
+scene = display(title='Spring',x=80, y=10, width=1000, height=300,background=color.white, userspin = True)
 
 #Set up base
 ground = box(length =10, width = 10, height=0.01, pos=(0,-0.25,0),color=color.green)
@@ -60,8 +60,10 @@ while (t < 8):
     # PHYSICS    >>>>>>             ##############
     ##############################################
     # calculate spring force
-    y = block.pos.x
-    FS = vector(-k*(y-l),0,0)
+    yx = block.pos.x
+    yy = block.pos.y
+    yz = block.pos.z
+    FS = vector(-k*(yx-l),-ky*(yy-l),-kz*(yz-l))
     #print(FS)
     # if damped oscillator - calculate air resistance
     fair = -0.5*cc*rho*(block.width**2) * (mag(block.v)**2) * norm(block.v)
