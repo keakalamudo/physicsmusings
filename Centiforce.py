@@ -1,27 +1,22 @@
 from __future__ import division
 from visual import *
 from visual.graph import *
-##
-# Set up area on screen to display objects
-##
-scene = display(title=' Turning around on a circle ',
-     x=100, y=10, width=800, height=800,  range=400,  background=color.white)
+
+#Area set up on screen to display objects
+scene = display(title=' Turning around on a circle ',x=100, y=10, width=800, height=800,  range=400,  background=color.white)
 scene.userzoom = True
-#
-# set up graph output
-#
-graph_velocity = gdisplay(title='Velocity',x=1200,y=200,xtitle='time(sec)',ytitle='V(m/s)',
-                   foreground=color.black, background=color.white)
-#
-# set up bsll object
-#
-ball = sphere(pos=(25 , -100 ,0), mass= 10, v=vector(0, 1, 0) ,
-              radius=4, color=color.blue,  make_trail=True)
-# set processing rate to 800
+
+#Set up graph output
+graph_velocity = gdisplay(title='Velocity',x=1200,y=200,xtitle='time(sec)',ytitle='V(m/s)',foreground=color.black, background=color.white)
+
+#Set up ball object
+ball = sphere(pos=(25 , -100 ,0), mass= 10, v=vector(0, 1, 0) ,radius=4, color=color.blue,  make_trail=True)
+
+#Set processing rate to 800
 myrate=800
-# start program
+#Start program
 scene.mouse.getclick()
-# print title
+#Print title
 print ((' Turning around  '))
 print ("  "  )
 
@@ -30,15 +25,10 @@ g = 9.8
 theta = 60*pi/180
 speed = 50
 
-
-
-#
-# initialize ball momentum
-#
+#Initializing ball momentum
 ball.p = ball.mass*ball.v
-#
-# initialize time paramters
-#
+
+#Initializing time paramters
 dt=.01
 t=0
 tc = 10
@@ -49,18 +39,13 @@ tc = 10
 vxcurve = gcurve(gdisplay=graph_velocity, color=color.red)
 vycurve = gcurve(gdisplay=graph_velocity, color=color.magenta)
 
-#
-# Place initial ball
-#
 
+#Place initial ball
 sphere(pos=ball.pos, radius=dott_radius, color=color.red)
 
-#
-# set start location ifor ball
-#
+#Set start location for ball
 initPosy = ball.pos.y
-# print initial point
-#rcenter = initPosy.x/2
+
 print ("Initial Position = %.2f m "%(ball.pos.y))
 
 ##############################################
