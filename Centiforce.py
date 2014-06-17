@@ -10,7 +10,7 @@ scene.userzoom = True
 graph_velocity = gdisplay(title='Velocity',x=1200,y=200,xtitle='time(sec)',ytitle='V(m/s)',foreground=color.black, background=color.white)
 
 #Set up ball object
-ball = sphere(pos=(25 , -100 ,0), mass= 10, v=vector(0, 1, 0) ,radius=4, color=color.blue,  make_trail=True)
+ball = sphere(pos=(25 , -100 ,0), mass= 10, v=vector(0, 1, 0) ,radius=10, color=color.blue,  make_trail=True)
 
 #Set processing rate to 800
 myrate=800
@@ -20,10 +20,7 @@ scene.mouse.getclick()
 print ((' Turning around  '))
 print ("  "  )
 
-dott_radius = 4
-g = 9.8
-theta = 60*pi/180
-speed = 50
+dott_radius = 5
 
 #Initializing ball momentum
 ball.p = ball.mass*ball.v
@@ -98,7 +95,7 @@ while (initPosy<=ball.pos.y):
     # periodically place ball on scene
 
 
-    if tc>1.0:
+    if tc>10:
         tc =0
         sphere(pos=ball.pos, radius=dott_radius, color =color.red)
 # print final position
