@@ -26,7 +26,7 @@ dott_radius = 5
 ball.p = ball.mass*ball.v
 
 #Initializing time paramters
-dt=.01
+dt=.05
 t=0
 tc = 10
 
@@ -95,9 +95,9 @@ while (initPosy<=ball.pos.y):
     # periodically place ball on scene
 
 
-    if tc>10:
+    if tc>30:
         tc =0
-        sphere(pos=ball.pos, radius=dott_radius, color =color.red)
+        sphere(pos=ball.pos, radius=5, color =color.red)
 # print final position
 #print(" time= %.1f s , distance = %.2f m "%(t,ball.pos.x-x0))
 print ("  "  )
