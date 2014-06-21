@@ -43,8 +43,8 @@ sphere(pos=ball.pos, radius=dott_radius, color=color.red)
 #Set start location for ball
 initPosy = ball.pos.y
 
-print ("Initial Position = %.2f m "%(ball.pos.y))
-
+print ("Initial xPosition = %.2f m Initial yPosition = %.2f m "%(ball.pos.x,ball.pos.y))
+fair =  vector (0,0,0)
 ##############################################
 # process loop (action)   ####################
 ##############################################
@@ -66,11 +66,13 @@ while (initPosy<=ball.pos.y):
         posx = ball.pos.x/pythagorean
         posy = ball.pos.y/pythagorean
         FC = vector(centForce*posx,centForce*posy,0)
+        fair = -0.5*cc*rho*pi*(ball.radius**2) * (mag(ball.v)**2) * norm(ball.v)
+
     else :
         FC = vector (0,0,0)
 
     # MOMENTUM PRINCIPLE
-    ball.p += FC*dt
+    ball.p += (FC+fair)*dt
     # update ball velocity
     ball.v = (ball.p/ball.mass)
     # update ball position
