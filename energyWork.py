@@ -30,7 +30,7 @@ scene.mouse.getclick()
 print (('Gravitation only'))
 
 #Ball object setup
-ball = sphere(pos=( x0 ,0 ,0), mass= 0.2, v=vector(speed*cos(theta), speed*sin(theta),0) , radius=0.5, color=color.blue,  make_trail=True  )
+ball = sphere(pos=( x0 ,0 ,0), mass= 0.5, v=vector(speed*cos(theta), speed*sin(theta),0) , radius=0.5, color=color.blue,  make_trail=True  )
 
 #Graphical output initialization
 vx_curve = gcurve(gdisplay=graph_velocity, color=ball.color)
