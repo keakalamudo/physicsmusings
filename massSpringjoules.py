@@ -57,3 +57,19 @@ block.p = m*block.v
 dt=.001
 t=0
 tc = 0
+
+
+#
+# start program with a mouse click
+#
+scene.mouse.getclick()
+# set processing rate
+myrate = 1000
+# print title
+print (" Spring force + quadratic air drag ")
+w = sqrt(k/m)
+period = (2*pi)/w
+bx_old = block.pos.x
+t1=0
+KE = 0
+work = 0 
