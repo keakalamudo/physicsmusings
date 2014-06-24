@@ -40,3 +40,20 @@ y = 0.5
 #
 # set up block object (shows horizontal motion of spring-block system)
 #
+block = box(length =0.5, width = 0.5, height=0.5, pos=(y,.5,.5), color=color.blue, v=vector(0,0,0))
+#
+# initialize parameters
+#
+m = 0.04
+k = 1.4
+l = 2
+g = 9.8
+cc = 1
+rho = 0.005
+block.p = m*block.v
+#
+# initialize time parameters
+#
+dt=.001
+t=0
+tc = 0
