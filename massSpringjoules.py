@@ -1,17 +1,15 @@
+#Mass and Spring Simulation(Gravity + Air Resistance + Wind) (VPython Source)
 from visual import *
 from visual.graph import *
 
 ##
 # Set up area on screen to display objects
 ##
-scene = display(title='Spring',
-    x=80, y=10, width=1000, height=300,
-    background=color.white, userspin = True)
+scene = display(title='Spring', x=80, y=10, width=1000, height=300,background=color.white, userspin = True)
 #
 # set up base to display objects on the scene
 #
-ground = box(length =10, width = 10, height=0.01, pos=(0,-0.25,0),
-             color=color.green)
+ground = box(length =10, width = 10, height=0.01, pos=(0,-0.25,0), color=color.green)
 #
 # set up graph output
 #
@@ -143,8 +141,3 @@ while (t < 5):
     bx_old = block.pos.x
 
 ######### END OF PROGRAM #######################################
-
-
-
-
-              
