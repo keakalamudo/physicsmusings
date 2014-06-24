@@ -23,4 +23,20 @@ graph_energy = gdisplay(title='Energy',x=1200,y=200,xtitle='time(sec)',ytitle='E
                    foreground=color.black, background=color.white)
 graph_work = gdisplay(title='Work',x=1200,y=200,xtitle='time(sec)',ytitle='Work(Joule)',
                    foreground=color.black, background=color.white)
-                   
+#
+# initialize graphical output
+#
+posplot = gcurve(gdisplay=graph_spring_x, color=color.red)
+vplot = gcurve(gdisplay=graph_spring_v, color=color.magenta)
+work_curve    = gcurve(gdisplay=graph_energy, color=color.green)
+kinetic    = gcurve(gdisplay=graph_energy, color=color.red)
+potential    = gcurve(gdisplay=graph_energy, color=color.black)
+kepe    = gcurve(gdisplay=graph_energy, color=color.yellow)
+kepe_work    = gcurve(gdisplay=graph_energy, color=color.blue)
+
+
+# initialize y Set to 0.5
+y = 0.5
+#
+# set up block object (shows horizontal motion of spring-block system)
+#
