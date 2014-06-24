@@ -72,4 +72,79 @@ period = (2*pi)/w
 bx_old = block.pos.x
 t1=0
 KE = 0
-work = 0 
+work = 0
+
+
+##############################################
+# process loop (action)   ####################
+##############################################
+while (t < 5):
+    rate(myrate)
+    ##############################################
+    # PHYSICS    >>>>>>             ##############
+    ##############################################
+    # calculate spring force
+    yx = block.pos.x
+    yy = block.pos.y
+    yz = block.pos.z
+    FS = vector(-k*(yx-l),0,0)
+    #print(FS)
+    # if damped oscillator - calculate air resistance
+    fair = -0.5*cc*rho*(block.width**2) * (mag(block.v)**2) * norm(block.v)
+    # calculate total force on block
+    FT=FS+fair
+    # MOMENTUM PRINCIPLE
+    block.p += FT*dt
+    # update block velocity
+    block.v = (block.p/m)
+    # update block position
+    block.pos +=(block.p/m)*dt
+    yx = block.pos.x
+    ##############################################
+    # PHYSICS    <<<<<<<<<    ####################
+    ##############################################
+    # update time paramters
+    t+=dt
+    tc+=dt
+    # plot position and velocity
+    pos = block.p.x/m
+    velo = block.v.x/m
+
+    posplot.plot(pos=(t,pos))
+    vplot.plot(pos=(t,velo))
+    ####################################################
+    ######################### energy and work   ########
+    # calculate KE and work
+    KE = .5*m*mag(block.v)**2
+    PE = .5*k*(yx-l)**2
+    dx=block.v*dt
+    work += dot(fair,dx)
+    # plot KE and work
+    kinetic.plot(pos=(t,KE))
+    potential.plot(pos=(t,PE))
+    kepe.plot(pos=(t,KE+PE))
+    kepe_work.plot(pos=(t,KE+PE-work))
+    work_curve.plot(pos=(t,work))
+
+
+    # Find Period and Calculate period; print them out
+    # Try and find your own method, I will help you out if you
+    # are struggling.
+    #print(block.pos)
+    if ((bx_old < 2) and (block.pos.x > 2)) :
+        print(" t = %.4f " %(t))
+
+        if t1 > 0 :
+                T = (t - t1)
+                print (" T_comp = %.3f     T_exact = %.3f   " %(T,period ))
+    # update time paramters
+        t1 = t
+    # update position paramter to find period
+    bx_old = block.pos.x
+
+######### END OF PROGRAM #######################################
+
+
+
+
+              
