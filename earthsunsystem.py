@@ -10,9 +10,8 @@ scene = display(title='Sun - Earth System',x=100, y=10, width=1000, height=1000,
 
 #
 # set up earth and sun objects
-Sun = sphere(pos=( 0 ,0 ,0), mass= 2e30, radius=7e8*10, color=color.orange)
-r0_es = 1.496e11
-Earth = sphere(pos=( r0_es ,0 ,0), mass= 6e24, radius=6.4e6*500, color=color.blue,  make_trail=True velocity =)
+Sun = sphere(pos=( 0 ,0 ,0), mass= 2e30, radius=7e8*10, color=color.orange velocity = vector(0,0,0))
+Earth = sphere(pos=( r0_es ,0 ,0), mass= 6e24, radius=6.4e6*500, color=color.blue,  make_trail=True velocity = vector(2e4,0,0))
 
 
 # define the path of the Earth
@@ -21,13 +20,8 @@ path.append(pos=Earth.pos)
 #
 # initialize earth and sun paramters 
 #
-                   # mass of the Earth
-                    # mass of the Sun 
-
-                      # initial velocity
-                    # gravitational constant
-                      # Earth initial momentum
-
+G = 6.67384e-11
+Earth.p = Earth.mass*Earth.velocity
 #
 # set up graph output for energy plots
 #
