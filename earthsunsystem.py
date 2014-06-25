@@ -25,12 +25,15 @@ Earth.p = Earth.mass*Earth.velocity
 #
 # set up graph output for energy plots
 #
+graph_energy = gdisplay(title='Energy',x=1200,y=200,xtitle='time(sec)',ytitle='Energy(Joule)',
+                   foreground=color.black, background=color.white)
 
 #
 # initialize graphical output for energy plots
 #
-
-
+ke_curve  =gcurve(gdisplay=graph_energy, color=color.blue)
+pe_curve  =gcurve(gdisplay=graph_energy, color=color.green)
+kpe_curve =gcurve(gdisplay=graph_energy, color=color.red)
 #
 # set up graph output for angular momentum plots
 #
