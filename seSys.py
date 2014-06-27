@@ -48,26 +48,30 @@ graph_angMomemtum = gdisplay(title='Angular Momentum',x=1200,y=200,xtitle='time(
 #
 # initialize graphical output for angular momentum plots
 #
-amX  =gcurve(gdisplay=graph_energy, color=color.blue)
-amY  =gcurve(gdisplay=graph_energy, color=color.green)
-amZ =gcurve(gdisplay=graph_energy, color=color.red)
+amX  =gcurve(gdisplay=graph_angMomemtum, color=color.blue)
+amY  =gcurve(gdisplay=graph_angMomemtum, color=color.green)
+amZ =gcurve(gdisplay=graph_angMomemtum, color=color.red)
 #
 # set up graph output for velocity plots
 #
 graph_Velocity = gdisplay(title=' Velocity ',xtitle='time(sec)',ytitle='V(m/s)',
     x=80, y= 720, width=1000, background=color.white)
-graph_POS = gdisplay(title=' Position x ',xtitle='time(sec)',ytitle='m',
+graph_POS = gdisplay(title=' Position ',xtitle='time(sec)',ytitle='m',
     x=80, y= 320, width=1000, background=color.white)
 
 
 #
 # initialize graphical output for velocity plots
 #
+posplot = gcurve(gdisplay=graph_Velocity, color=color.red)
+vplot = gcurve(gdisplay=graph_POS, color=color.magenta)
 
 #
 # initialize time parameter
 #
- # one day
+dt =24*60*60 # one day
+t = 0
+tc = 0
 
 # start program with mouse click
 
