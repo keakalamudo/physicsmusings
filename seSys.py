@@ -6,11 +6,11 @@ from visual.graph import*
 ##
 # Set up area on screen to display objects
 ##
-scene = display(title='Sun - Earth System',x=100, y=10, width=1000, height=1000, background=color.white, userspin = True, range =5.e11)
+scene = display(title='Sun - Earth System',x=100, y=10, width=1000, height=1000, background=color.white, range =5.e11)
 #
 # set up earth and sun objects
 #
-
+r0_es= 1.496e11
 Sun = sphere(pos=( 0 ,0 ,0), mass= 0, radius=7e8*10, color=color.orange, v= vector(0,0,0))
 Earth = sphere(pos=(r0_es ,0 ,0), mass= 0, radius=6.4e6*500, color=color.blue,  make_trail=True, v = vector(0,0,0))
 
@@ -21,9 +21,10 @@ path.append(pos=Earth.pos)
 #
 # initialize earth and sun paramters 
 #
+
 Sun.mass = 2e30
 Earth.mass = 6e24
-Earth.v = vector(2e4,0,0) 
+Earth.v = vector(0,2.9e4,0) 
 G = 6.67384e-11
 Earth.p = Earth.mass*Earth.v
 #
@@ -63,53 +64,77 @@ graph_POS = gdisplay(title=' Position ',xtitle='time(sec)',ytitle='m',
 #
 # initialize graphical output for velocity plots
 #
-posplot = gcurve(gdisplay=graph_Velocity, color=color.red)
-vplot = gcurve(gdisplay=graph_POS, color=color.magenta)
+posplotx = gcurve(gdisplay=graph_POS, color=color.red)
+posploty = gcurve(gdisplay=graph_POS, color=color.magenta)
+vplotx = gcurve(gdisplay=graph_Velocity, color=color.magenta)
+vploty = gcurve(gdisplay=graph_Velocity, color=color.green)
 
 #
 # initialize time parameter
 #
 dt =24*60*60 # one day
 t = 0
-tc = 0
+
+earthvy_old = Earth.v.y
+y_acc = (earthvy_old-Earth.v.y)/dt
 
 # start program with mouse click
-
+scene.mouse.getclick()
+myrate = 100
 ##############################################
 # process loop (action)   ####################
 ##############################################
-
-                  # plot for two years
-                   # shows 100 points in a second
- 
+while t<(2*366*24*60*60):
+    rate(myrate)
     ##############################################
     # PHYSICS    >>>>>>             ##############
     ##############################################
     # calculate force 
-                                                # Sun - Earth vector
-                                                # sqrt(r_vector.x**2 + r_vector.y**2 + r_vector.z**2 ) # distance
-                                                # t vector
-                                                # Newton's gravitational force
-                                                # MOMENTUM PRINCIPLE
+    r_vector = Earth.pos - Sun.pos  # Sun - Earth vector
+    r = mag(r_vector)               # sqrt(r_vector.x**2 + r_vector.y**2 + r_vector.z**2 ) # distance
+    rhat = r_vector/r               # unit vector
+    F= (-G*Earth.mass*Sun.mass*rhat)/r**2 # Newton's gravitational force
+    Earth.p += F*dt                # MOMENTUM PRINCIPLE
                                                 # update momentum
-     # update position
-                      # draw a line
-                # update velocity
-    # calculate energy 
-                                              # kinetic energy
-                                              # potential energy
+    Earth.pos +=(Earth.p/Earth.mass)*dt # update position
+    path.append(pos=Earth.pos)                  # draw a line
+    Earth.v = (Earth.p/Earth.mass)            # update velocity
+    # calculate energy
+    KE = .5*Earth.mass*mag(Earth.v)**2# kinetic energy
+    PE = Earth.mass*G*r# potential energy
     # calculate angular momentum
+    #w = sqrt(k/m)
+    #period = (2*pi)/w
 
+    # calculate velocity
+    vx = Earth.p.x/Earth.mass
+    vy = Earth.p.y/Earth.mass
+    posx = Earth.v.x/Earth.mass
+    posy = Earth.v.y/Earth.mass 
     ##############################################
     # PHYSICS    <<<<<<<<<    ####################
     ##############################################
     # plot energy
-
+    ke_curve.plot(pos=(t,KE))
+    pe_curve.plot(pos=(t,PE))
     # plot velocity
+    vplotx.plot(pos=(t,vx))
+    vploty.plot(pos=(t,vy))
+    # plot Position
+    posplotx.plot(pos=(t,posx))
+    posploty.plot(pos=(t,posx))
     
     # plot angular momentum
  
     # update time
+    t+=dt
+
+    if Earth.v.y > 0:
+        if abs(y_acc) < 0.00005:
+            print("time = %.1f s" %(t))
+
+    earthvy_old = Earth.v.y
+
              
 
     
