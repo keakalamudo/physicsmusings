@@ -43,7 +43,7 @@ kpe_curve =gcurve(gdisplay=graph_energy, color=color.red)
 #
 # set up graph output for angular momentum plots
 #
-graph_angMomemtum = gdisplay(title='Angular Momentum',x=1200,y=200,xtitle='time(sec)',ytitle='Energy(Joule)',
+graph_angMomemtum = gdisplay(title='Angular Momentum',x=1200,y=200,xtitle='time(sec)',ytitle='L',
                    foreground=color.black, background=color.white)
 
 #
@@ -57,22 +57,16 @@ amZ =gcurve(gdisplay=graph_angMomemtum, color=color.red)
 #
 graph_Velocity = gdisplay(title=' Velocity ',xtitle='time(sec)',ytitle='V(m/s)',
     x=80, y= 720, width=1000, background=color.white)
-graph_POS = gdisplay(title=' Position ',xtitle='time(sec)',ytitle='m',
-    x=80, y= 320, width=1000, background=color.white)
-
-
 #
 # initialize graphical output for velocity plots
 #
-posplotx = gcurve(gdisplay=graph_POS, color=color.red)
-posploty = gcurve(gdisplay=graph_POS, color=color.magenta)
 vplotx = gcurve(gdisplay=graph_Velocity, color=color.magenta)
 vploty = gcurve(gdisplay=graph_Velocity, color=color.green)
 
 #
 # initialize time parameter
 #
-dt =24*60*60 # one day
+dt =12*60*60 # one day
 t = 0
 
 earthvy_old = Earth.v.y
@@ -80,11 +74,11 @@ y_acc = (earthvy_old-Earth.v.y)/dt
 
 # start program with mouse click
 scene.mouse.getclick()
-myrate = 100
+myrate = 1000
 ##############################################
 # process loop (action)   ####################
 ##############################################
-while t<(2*366*24*60*60):
+while t<(4*366*24*60*60):
     rate(myrate)
     ##############################################
     # PHYSICS    >>>>>>             ##############
@@ -101,36 +95,30 @@ while t<(2*366*24*60*60):
     Earth.v = (Earth.p/Earth.mass)            # update velocity
     # calculate energy
     KE = .5*Earth.mass*mag(Earth.v)**2# kinetic energy
-    PE = Earth.mass*G*r# potential energy
+    PE = (-G*Earth.mass*Sun.mass)/r # potential energy
     # calculate angular momentum
-    w = Earth.v/r
-    inertia = Earth.mass*r**2
-    angMomentum = inertia*w
+    angMomentum = cross(Earth.pos,Earth.p)
     
     #period = (2*pi)/w
 
     # calculate velocity
     vx = Earth.p.x/Earth.mass
     vy = Earth.p.y/Earth.mass
-    posx = Earth.v.x/Earth.mass
-    posy = Earth.v.y/Earth.mass 
     ##############################################
     # PHYSICS    <<<<<<<<<    ####################
     ##############################################
     # plot energy
     ke_curve.plot(pos=(t,KE))
     pe_curve.plot(pos=(t,PE))
+    kpe_curve.plot(pos=(t,KE+PE))
     # plot velocity
     vplotx.plot(pos=(t,vx))
     vploty.plot(pos=(t,vy))
-    # plot Position
-    posplotx.plot(pos=(t,posx))
-    posploty.plot(pos=(t,posx))
     
     # plot angular momentum
-    amX.plot(pos=(t,posx))
-    amY.plot(pos=(t,posx))
-    amZ.plot(pos=(t,posx))
+    amX.plot(pos=(t,angMomentum.x))
+    amY.plot(pos=(t,angMomentum.y))
+    amZ.plot(pos=(t,angMomentum.z))
     # update time
     t+=dt
 
