@@ -134,9 +134,9 @@ while t<(2*366*24*60*60):
     # update time
     t+=dt
 
-    if Earth.v.y > 0:
-        if abs(y_acc) < 0.00005:
-            print("time = %.1f s" %(t))
+    #if Earth.v.y > 0:
+    #    if abs(y_acc) < 0.00005:
+    #       print("time = %.1f s" %(t))
 
     earthvy_old = Earth.v.y
 
