@@ -103,7 +103,10 @@ while t<(2*366*24*60*60):
     KE = .5*Earth.mass*mag(Earth.v)**2# kinetic energy
     PE = Earth.mass*G*r# potential energy
     # calculate angular momentum
-    #w = sqrt(k/m)
+    w = Earth.v/r
+    inertia = Earth.mass*r**2
+    angMomentum = inertia*w
+    
     #period = (2*pi)/w
 
     # calculate velocity
@@ -125,7 +128,9 @@ while t<(2*366*24*60*60):
     posploty.plot(pos=(t,posx))
     
     # plot angular momentum
- 
+    amX.plot(pos=(t,posx))
+    amY.plot(pos=(t,posx))
+    amZ.plot(pos=(t,posx))
     # update time
     t+=dt
 
