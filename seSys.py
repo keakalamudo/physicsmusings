@@ -39,6 +39,9 @@ graph_energy = gdisplay(title='Energy',x=1200,y=200,xtitle='time(sec)',ytitle='E
 ke_curve  =gcurve(gdisplay=graph_energy, color=color.blue)
 pe_curve  =gcurve(gdisplay=graph_energy, color=color.green)
 kpe_curve =gcurve(gdisplay=graph_energy, color=color.red)
+kpew_curve =gcurve(gdisplay=graph_energy, color=color.yellow)
+work_curve =gcurve(gdisplay=graph_energy, color=color.black)
+
 
 #
 # set up graph output for angular momentum plots
@@ -75,6 +78,7 @@ y_acc = (earthvy_old-Earth.v.y)/dt
 # start program with mouse click
 scene.mouse.getclick()
 myrate = 1000
+work = 0 
 ##############################################
 # process loop (action)   ####################
 ##############################################
@@ -104,6 +108,10 @@ while t<(4*366*24*60*60):
     # calculate velocity
     vx = Earth.p.x/Earth.mass
     vy = Earth.p.y/Earth.mass
+
+    # calculate work
+    dx=Earth.v*dt
+    work += dot(F,dx)
     ##############################################
     # PHYSICS    <<<<<<<<<    ####################
     ##############################################
@@ -111,6 +119,8 @@ while t<(4*366*24*60*60):
     ke_curve.plot(pos=(t,KE))
     pe_curve.plot(pos=(t,PE))
     kpe_curve.plot(pos=(t,KE+PE))
+    kpew_curve.plot(pos=(t,KE+PE-work))
+    work_curve.plot(pos=(t,work))
     # plot velocity
     vplotx.plot(pos=(t,vx))
     vploty.plot(pos=(t,vy))
